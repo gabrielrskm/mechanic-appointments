@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "gestion-de-turnos-gaby": {
+      "hosting": {
+        "mechanic-reservation": [
+          "gestion-de-turnos-gaby"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "gestion-de-turnos-gaby"
+  }
+}
