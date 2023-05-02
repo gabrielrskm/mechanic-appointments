@@ -1,6 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { LoginFormComponent, LoginInterface } from '../components/login/login.view';
 import { AuthService } from 'src/app/core/firebase/auth.service';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogEmailComponent } from '../../shared/dialogs/dialog.components';
 
 @Component({
    standalone: true,
@@ -11,8 +14,18 @@ import { AuthService } from 'src/app/core/firebase/auth.service';
 export class LoginComponent {
     
    auth = inject(AuthService)
+   router = inject(Router)
+   dialog  = inject(MatDialog);
 
-    login(value: LoginInterface) {
-      this.auth.signInWithEmail(value.email, value.password);
+   login(value: LoginInterface) {
+      const res = this.auth.signInWithEmail(value.email, value.password);
+      res.catch(error => {
+         this.dialog.open(DialogEmailComponent, {
+            data: {
+               title: 'Error',
+               message: error.code
+            }
+         });
+       })
    }
 }

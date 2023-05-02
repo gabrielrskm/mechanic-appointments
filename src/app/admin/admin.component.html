@@ -1,0 +1,59 @@
+<form autocomplete="off" (ngSubmit)="sendData()" [formGroup]="myForm">
+   <mat-form-field>
+      <mat-label>Dia del turno</mat-label>
+      <input
+         matInput
+         [matDatepicker]="picker"
+         formControlName="date"
+         readonly
+      />
+      <mat-datepicker-toggle
+         matIconSuffix
+         [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+   </mat-form-field>
+
+   <mat-form-field>
+      <mat-label>Hora de inicio</mat-label>
+      <input
+         matInput
+         name="init"
+         formControlName="init"
+         [ngxMatTimepicker]="pickerInit"
+         placeholder="4:00 PM"
+         readonly
+      />
+      <ngx-mat-timepicker #pickerInit></ngx-mat-timepicker>
+   </mat-form-field>
+
+   <mat-form-field>
+      <mat-label>Hora de finalizacion</mat-label>
+      <input
+         matInput
+         name="end"
+         formControlName="end"
+         [ngxMatTimepicker]="pickerEnd"
+         placeholder="5:00 PM"
+         readonly
+      />
+      <ngx-mat-timepicker #pickerEnd></ngx-mat-timepicker>
+   </mat-form-field>
+
+   <mat-form-field appearance="fill">
+      <mat-label>Cliente del turno</mat-label>
+      <mat-select>
+         <mat-option *ngFor="let user of users" [value]="user">
+            {{ user }}
+         </mat-option>
+      </mat-select>
+   </mat-form-field>
+
+   <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="myForm.invalid"
+   >
+      Agregar
+   </button>
+</form>

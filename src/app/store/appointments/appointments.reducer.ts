@@ -1,10 +1,14 @@
 import { createReducer } from "@ngrx/store";
-import { AppointemetInterface } from "src/app/core/interface/appointment.inteface";
+import { AppointmentInterface } from "src/app/core/interface/appointment.inteface";
 
 
-export const initialState: AppointemetInterface = {
-    
-  }
+export const initialState: AppointmentInterface = {
+  id: "",
+  date: "",
+  init_time: "",
+  end_time: "",
+  status: false
+}
   
   export const appointmentReducer = createReducer(
      initialState,

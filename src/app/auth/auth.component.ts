@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { LoginComponent } from './container/login.component';
 import { SiginComponent } from './container/sigin.component';
 import { PopUpComponent } from './container/popup.component';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-auth',
@@ -21,27 +22,24 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   service = inject(AuthService)
   route  = inject(Router)
-  result$: Observable<any | null> = new BehaviorSubject(null);
-  init : Subscription = new Subscription();
-  charge : boolean = true
+  result$: Observable<any | null> = this.service.user$;
+  init : Subscription | null = null;
+  charge: boolean = true;
+  mobile : boolean = false;
+  breackpointObserver = inject(BreakpointObserver).observe(Breakpoints.Handset).subscribe(({ matches }) => {
+    this.mobile = matches;
+  })
 
   ngOnInit() {
-      // this.result$ = this.service.getUserInfo();
-      // this.init = this.result$.subscribe((value) => {
-          
-      //     if (value === null) this.charge = true;
-      //     if (value)  {
-      //         this.charge = false;
-      //         if (value.role === 'admin') this.route.navigate(['/admin']);
-      //         else this.route.navigate(['/appointment']);
-      //     }
-      
-          
-      // })
+    this.init = this.result$.subscribe((res) => {
+      if(res === null)return
+      this.route.navigate(['/dashboard']);
+    });
+    
   }
-
   ngOnDestroy(): void {
-      this.init.unsubscribe();
+    this.init?.unsubscribe();
+    this.breackpointObserver.unsubscribe();
   }
 
 }

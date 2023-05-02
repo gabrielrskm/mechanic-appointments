@@ -1,31 +1,54 @@
-<div class="tab">
-
-
-    <form (ngSubmit)="signIn( $event)"
-        >
-      <br>
+<form autocomplete="off" (ngSubmit)="sigIn()" [formGroup]="myForm">
       <mat-form-field>
         <mat-label>Nombre</mat-label>
-        <input matInput placeholder="Nombre" name="nombre" required />
+        <input  formControlName ="name" 
+                matInput 
+                placeholder="Nombre" 
+                name="nombre" 
+                />
+
       </mat-form-field> 
-      <br>
       <mat-form-field>
         <mat-label>Email</mat-label>
-        <input matInput placeholder="Email" name="email" required />
+        <input  type="email"  
+                formControlName ="email" 
+                matInput 
+                placeholder="Email" 
+                name="email" 
+                />
+
+        <mat-error *ngIf="isValid('email')">
+                  Mail incorrecto
+        </mat-error>
       </mat-form-field>
-      <br>
       <mat-form-field>
         <mat-label>Password</mat-label>
-        <input matInput placeholder="Password" name="pass1" required />
+        <input  matInput 
+                type="password"  
+                formControlName ="pass1" 
+                placeholder="Password" 
+                name="pass1" 
+                />
+        <mat-error *ngIf="isValid('pass1')">
+                  minimo 6 caracteres
+        </mat-error>
       </mat-form-field>
-      <br>
       <mat-form-field>
         <mat-label>Repita Password</mat-label>
-        <input matInput placeholder="Repita Password" name="pass2" required />
+        <input  matInput 
+                type="password" 
+                formControlName = "pass2" 
+                placeholder="Repita Password" 
+                name="pass2" 
+                />
+        <mat-error *ngIf="isValid('pass2')">
+                No coincide las contraseñas
+        </mat-error>
       </mat-form-field>
-      <br>
-        <button mat-raised-button color="primary">Register</button>
-      <br><br>
-    </form>
-  </div>
+        <button type="submit" 
+                mat-raised-button color="primary"
+                [disabled]="myForm.invalid">
+          Register
+        </button>
+</form>
   

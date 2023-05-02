@@ -1,34 +1,30 @@
-<div class="">
-    <form (ngSubmit)="clickForm()" #myForm="ngForm">
-        <br />
+
+    <form autocomplete="off" (ngSubmit)="clickForm()" [formGroup]="myForm">
+        
         <mat-form-field>
-            <mat-label>Usuario</mat-label>
+            <mat-label>Email</mat-label>
             <input
-                [(ngModel)]="initForm.email"
+                formControlName ="user"
                 matInput
-                placeholder="Usuario"
+                placeholder="Email"
                 name="user"
-                required
                 [value]="title"
             />
         </mat-form-field>
-        <br />
+        
         <mat-form-field>
             <mat-label>Password</mat-label>
             <input
-                [(ngModel)]="initForm.pass"
+                formControlName ="pass"
                 matInput
                 placeholder="Password"
                 type="password"
                 name="pass"
-                required
             />
         </mat-form-field>
-        <br /><br />
+        
         <button mat-raised-button color="primary" 
                 [disabled]="myForm.invalid">
             Log In
         </button>
-        <br /><br />
     </form>
-</div>
