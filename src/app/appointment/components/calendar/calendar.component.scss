@@ -1,0 +1,26 @@
+mat-card{
+   margin-top: 1rem;
+   margin-bottom: 1rem;
+   min-width: 8rem;
+   max-width: 8rem;
+}
+
+.center{
+   display: flex;
+   flex-direction: row;
+   width: 100%;
+   justify-content: center;
+}
+
+.container{
+   margin-left: 1rem;
+   margin-right: 1rem;
+   display: flex;
+   flex-direction: row;
+   gap: 1rem;
+   width: auto;
+   max-width: 100%;
+   overflow: auto;
+   scroll-snap-align: center;
+   
+}

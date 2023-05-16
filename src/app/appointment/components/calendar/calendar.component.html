@@ -1,0 +1,27 @@
+<ng-container *ngIf="items !== null; else notAppointments">
+   <div class="center">
+      <div class="container">
+         <mat-card *ngFor="let item of items">
+            <mat-card-header>
+               <mat-card-title>Title</mat-card-title>
+               <mat-card-subtitle>Subtitle</mat-card-subtitle>
+            </mat-card-header>
+            <img matCardImage src="Card wide image source" />
+            <mat-card-content> Text content </mat-card-content>
+            <mat-card-actions align="start">
+               <button mat-button (click)="click()">Action1</button>
+            </mat-card-actions>
+            <mat-card-footer> Footer </mat-card-footer>
+         </mat-card>
+      </div>
+   </div>
+</ng-container>
+
+<ng-template #notAppointments>
+    <div class="center">
+
+        <mat-card>
+            <mat-card-content> No hay dias disponibles </mat-card-content>
+        </mat-card>
+    </div>
+</ng-template>

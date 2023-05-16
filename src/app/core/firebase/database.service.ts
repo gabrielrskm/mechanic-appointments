@@ -15,13 +15,19 @@ export class DatabaseService {
       
    }
 
-   setUsers() { }
+  setUsers() { }
+  
+  getUserInfo() {
+    
+  }
 
    setAppointmenet(){}
 
    getAppointment() { }
    
-   getAppointments() {}
+  getAppointments() {
+     
+   }
    
    async setAppointments(data: AppointmentInterface) {
         
