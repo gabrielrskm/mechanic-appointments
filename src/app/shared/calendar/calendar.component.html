@@ -1,43 +1,42 @@
-<ng-container *ngIf=" !(cards |async) ; else handset">
-
-<mat-grid-list cols="7" rows="5" rowHeight="2:1">
-  <mat-grid-tile class="grid">Do </mat-grid-tile>
-  <mat-grid-tile class="grid">Lu </mat-grid-tile>
-  <mat-grid-tile class="grid">Ma </mat-grid-tile>
-  <mat-grid-tile class="grid">Mi </mat-grid-tile>
-  <mat-grid-tile class="grid">Ju </mat-grid-tile>
-  <mat-grid-tile class="grid">Vi </mat-grid-tile>
-  <mat-grid-tile class="grid">Sa </mat-grid-tile>
-
-  <mat-grid-tile class="grid" *ngFor="let day of days; index as i"
-                  (click) = "selectDay(day.numberDay, day.currentMonth)"
-  >
-  <div *ngIf="day != null else empty"
-       class="day"> 
-       <header>{{day.numberDay}}</header>
-       <main>este es el cuerpo</main>
-       <footer>este es el pie</footer>
-  </div>
-  </mat-grid-tile>
-
-
-</mat-grid-list>
+<ng-container *ngIf="!(breakpoint | async); else handset">
+  <ng-container *ngTemplateOutlet="pc"></ng-container>
 </ng-container>
-<ng-template #empty></ng-template>
-<ng-template #handset>
-  <mat-grid-list cols="1" rowHeight="6:1">
-    <mat-grid-tile class="grid" *ngFor="let day of days; index as i"
-                  (click) = "selectDay(day.numberDay, day.currentMonth)"
-  >
-  <div *ngIf="day != null else empty"
-       class="day"> 
-       <header>{{day.numberDay}}</header>
-       <main>este es el cuerpo</main>
-       <footer>este es el pie</footer>
-  </div>
-  </mat-grid-tile>
-  </mat-grid-list>
+
+<ng-template #pc>
+  <mat-grid-list cols="7" rows="5" rowHeight="2:1">
+    <mat-grid-tile class="grid"
+                   *ngFor="let nameDay of daysOfWeek"
+                   >
+      {{nameDay}}
+   </mat-grid-tile>
+
+    <mat-grid-tile
+       class="grid"
+       *ngFor="let day of days; index as i"
+       (click)="selectDay(day.numberDay, day.currentMonth)"
+    >
+       <div *ngIf="day != null && day.currentMonth else empty" class="day">
+          <main><strong>{{ day.numberDay }}</strong></main>
+          <main>5  asignados</main>
+          <main>3  libres</main>
+       </div>
+    </mat-grid-tile>
+ </mat-grid-list>
 </ng-template>
 
+<ng-template #handset>
+   <mat-grid-list cols="1" rowHeight="5:1" gutterSize="0.2rem">
+      <ng-container *ngFor="let day of days; index as i">
+      <mat-grid-tile class="grid" *ngIf="day != null && day.currentMonth"
+                     (click)="selectDay(day.numberDay, day.currentMonth) "
+                     >
+         <div class="day">
+            <header><strong>{{getDayName(day.dayName)}} {{ day.numberDay }} </strong></header>
+            <main>5 turnos libres</main>
+         </div>
+      </mat-grid-tile>
+      </ng-container>
+   </mat-grid-list>
+</ng-template>
 
-
+<ng-template #empty></ng-template>
